@@ -1,0 +1,29 @@
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-content: stretch;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 100vh;
+}
+
+.grid > .grid-cell {
+  flex-basis: 1;
+  display: flex;
+  width: calc(100vw/8);
+  height: calc(100vh/8);
+  align-items: center;
+  justify-content: center;
+}
