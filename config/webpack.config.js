@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   devtool: 'inline-cheap-source-map',
-  watch: true,
   entry: path.resolve(__dirname, '../src/index.js'),
   module: {
     rules: [
@@ -30,7 +29,8 @@ module.exports = {
                     // {
                     //   // Options
                     // },
-                    'autoprefixer', {},
+                    'autoprefixer',
+                    {},
                   ],
                 ],
               },
@@ -41,7 +41,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [ '.tsx', '.jsx', '.ts', '.js' ],
+    extensions: ['.tsx', '.jsx', '.ts', '.js'],
   },
   target: 'web',
   output: {
@@ -54,13 +54,13 @@ module.exports = {
     liveReload: false,
     clientLogLevel: 'debug',
     // lazy: true,
-    port: 8080
+    port: 8080,
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Talwind Test React App',
       template: path.join(__dirname, './index.html'),
     }),
-    new CleanWebpackPlugin()
-  ]
+    new CleanWebpackPlugin(),
+  ],
 };
