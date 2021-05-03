@@ -40,5 +40,5 @@ body {
 }
 
 .grid-cell.grid-cell-updated div {
-  border: 2px inset transparent;
+  border: 4px solid transparent;
 }

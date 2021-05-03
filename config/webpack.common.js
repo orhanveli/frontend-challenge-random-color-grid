@@ -1,11 +1,14 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
-  devtool: 'inline-cheap-source-map',
-  entry: path.resolve(__dirname, '../src/index.js'),
+  entry: {
+    index: {
+      import: path.resolve(__dirname, '../src/index.js'),
+      dependOn: 'react',
+    },
+    react: ['react', 'react-dom'],
+  },
   module: {
     rules: [
       {
@@ -48,19 +51,5 @@ module.exports = {
     filename: '[name]-[fullhash].js',
     path: path.resolve(__dirname, '../public/dist'),
   },
-  devServer: {
-    contentBase: path.resolve(__dirname, '../public'),
-    compress: false,
-    liveReload: false,
-    clientLogLevel: 'debug',
-    // lazy: true,
-    port: 8080,
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Talwind Test React App',
-      template: path.join(__dirname, './index.html'),
-    }),
-    new CleanWebpackPlugin(),
-  ],
+  plugins: [new CleanWebpackPlugin()],
 };
