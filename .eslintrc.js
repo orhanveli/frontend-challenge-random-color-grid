@@ -7,7 +7,6 @@ const prettierOptions = JSON.parse(
 
 module.exports = {
   extends: ['eslint:recommended', 'plugin:react/recommended', 'prettier'],
-
   // extends: ['airbnb', 'prettier', 'prettier/react'],
   plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y'],
   env: {
@@ -19,7 +18,7 @@ module.exports = {
   parserOptions: {
     // debugLevel: true,
     project: 'tsconfig.json',
-    ecmaVersion: 6,
+    ecmaVersion: 2020,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,

@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 
 import { GridCell } from './GridCell';
 import { randomColourGenerator, getContrastColour } from '../utils';
+import { useSound } from '../hooks/use-sound';
 
 export const Grid = () => {
+  const { audio } = useSound('/assets/sounds/small-sweep-transition-166.wav');
+
   const [cells, setCells] = useState([]);
+  const updatedClassName = 'grid-cell-updated';
 
   const generateRandomColoredCell = (cssClass = '') => {
     const backgroundColor = randomColourGenerator();
@@ -24,24 +28,30 @@ export const Grid = () => {
   };
 
   const updateRandomCells = (count = 1, notThis) => {
+    const randomCells = [];
+    for (let ni = 0; ni < count; ni++) {
+      randomCells.push(generateRandomCellIndexExceptThis(notThis));
+    }
+
     setCells((prevCells) => {
-      const newCells = [...prevCells];
-      for (let ci = 0; ci < count; ci++) {
-        const randomCellIndex = generateRandomCellIndexExceptThis(notThis);
-        newCells.splice(
-          randomCellIndex,
-          1,
-          generateRandomColoredCell('grid-cell-updated'),
-        );
-      }
+      const newCells = prevCells.map((cell, ci) => {
+        if (randomCells.indexOf(ci) == -1) {
+          return {
+            ...cell,
+            cssClass: '',
+          };
+        }
+        return generateRandomColoredCell(updatedClassName);
+      });
       return newCells;
     });
   };
 
   const cellClickHandler = (index) => {
     updateRandomCells(3, index);
-    // console.log(index)
-  }
+    audio.currentTime = 0;
+    audio.play();
+  };
 
   useEffect(() => {
     const tempCells = [];
@@ -56,8 +66,7 @@ export const Grid = () => {
       {cells.map((cell, x) => (
         <GridCell
           cellClickHandler={() => cellClickHandler(x)}
-          backgroundColor={cell.backgroundColor}
-          color={cell.color}
+          {...cell}
           key={`cell-${x}`}
         />
       ))}

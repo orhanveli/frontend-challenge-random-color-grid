@@ -20,12 +20,25 @@ body {
 }
 
 .grid > .grid-cell {
-  flex-basis: 1;
   display: flex;
+  flex-basis: 1;
+  flex-shrink: 0;
+  flex-grow: 0;
+  align-content: stretch;
+  align-items: stretch;
   width: calc(100vw/8);
   height: calc(100vh/8);
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
   transition: all 1s;
+}
+
+.grid-cell div {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-grow: 1;
+}
+
+.grid-cell.grid-cell-updated div {
+  border: 2px inset transparent;
 }
